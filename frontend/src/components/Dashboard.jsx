@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useDropzone } from 'react-dropzone';
 
 // For local testing. This will be replaced with your Render URL during deployment.
-const API_URL = 'https://ai-suite-backend.onrender.com';
+const API_URL = 'https://ai-suite-backend.onrender.com/';
 
 const fadeIn = keyframes`from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); }`;
 

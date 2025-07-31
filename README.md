@@ -1,134 +1,94 @@
-AI Supply Chain Suite - Neumorphism Edition
-Live Demo: https://ai-supply-chain.netlify.app/
+AI-SUPPLY-CHAIN-PROJECT
+Transforming Supply Chains with Intelligent Automation
 
-A modern, full-stack web application designed to bring powerful AI tools to supply chain management. This suite features a beautiful Neumorphic user interface and offers two core functionalities: an AI-powered inventory counter and an intelligent chat assistant.
+Built with the tools and technologies:
 
-Features
-📦 Inventory Vision: Upload an image of milk cartons and get an instant, accurate count.
+</div>
 
-🧠 Custom AI Model: Powered by a custom-trained YOLOv8 model for high-accuracy object detection.
+Table of Contents
+Overview
 
-🤖 AI Chat Assistant: A real-time, streaming chat interface connected to the Google Gemini API for intelligent Q&A and assistance.
-
-✨ Neumorphic UI: A stunning, modern user interface built with soft shadows and a tactile feel, created using React and styled-components.
-
-🚀 Full-Stack Architecture: A robust backend built with Python and FastAPI, serving the AI model and handling API requests.
-
-☁️ Deployed for Free: The backend is hosted on Render and the frontend on Netlify, utilizing their generous free tiers.
-
-Tech Stack
-Frontend
-
-Backend & AI
-
-React (with Vite)
-
-Python 3
-
-Styled Components for Neumorphism
-
-FastAPI for the web server
-
-Axios for API requests
-
-Uvicorn as the ASGI server
-
-React Dropzone for file uploads
-
-Ultralytics YOLOv8 for object detection
-
-React Markdown for chat rendering
-
-OpenCV for image processing
-
-Netlify for hosting
-
-Google Gemini API for generative AI
-
-
-
-Render for hosting
-
-How to Use the Live Application
-Visit the live demo at https://ai-supply-chain.netlify.app/.
-
-Using the Inventory Vision
-The application loads on the "Inventory Vision" tab by default.
-
-Drag and drop an image containing milk cartons into the dashed box, or click the box to select a file from your computer.
-
-A preview of your uploaded image will appear.
-
-Click the "Count Items" button.
-
-The application will send the image to the backend, and after a moment, it will display the annotated image with bounding boxes and the final count.
-
-Using the AI Chat Assistant
-Click on the "AI Chat Assistant" button in the top navigation.
-
-Get a Gemini API Key: To use the chat, you need a free API key from Google. You can get one here: Google AI for Developers.
-
-Enter Your Key: Paste your Gemini API key into the input box. The key is saved in your browser's local storage for convenience, so you only need to do this once.
-
-Start Chatting: Once the key is entered, you can type questions into the message box at the bottom and press Enter or click "Send". The AI's response will stream in real-time.
-
-Running the Project Locally
-To run this application on your own machine, follow these steps.
+Getting Started
 
 Prerequisites
-Git
 
-Node.js (which includes npm)
+Installation
 
-Python 3.8+
+Usage
 
-1. Clone the Repository
-First, clone the project repository to your local machine.
+Live Demo
 
-git clone https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
-cd YOUR_REPO_NAME
+Overview
+ai-supply-chain-project is a comprehensive developer toolkit that integrates AI-powered inventory counting and intelligent chat assistance into a modern web application. It leverages advanced AI models, React, and a scalable backend architecture to streamline supply chain management workflows.
 
-2. Set Up the AI Model
-You need a trained model file to run the backend.
+Why ai-supply-chain-project?
+This project enables developers to rapidly build and deploy AI-enhanced supply chain solutions. The core features include:
 
-Train your own model using the provided Colab notebooks.
+🧠 AI Inventory Counting: Automate milk carton detection and counting through image analysis, reducing manual effort and improving accuracy with a custom-trained YOLOv8 model.
+
+🤖 Conversational AI Chat: Engage with a streaming, markdown-rendered chat interface powered by the Google Gemini API for real-time support and insights.
+
+✨ Stunning Neumorphic UI: A modern, tactile user interface built with soft shadows and gradients using React and styled-components.
+
+🚀 Fast Development Environment: Utilize Vite with React for rapid iteration, hot module replacement, and efficient UI development.
+
+🧩 Modular Architecture: Seamlessly connect frontend components with a robust FastAPI backend for scalable, maintainable workflows.
+
+🎯 Focused Supply Chain Features: Designed specifically to enhance inventory accuracy and operational efficiency.
+
+Getting Started
+Prerequisites
+This project requires the following dependencies to be installed on your system:
+
+Programming Languages: Python 3.8+, Node.js (v18+)
+
+Package Managers: Npm, Pip
+
+Installation
+Build ai-supply-chain-project from the source and install dependencies:
+
+Clone the repository:
+
+git clone https://github.com/Pavan19047/ai-supply-chain-project
+
+Navigate to the project directory:
+
+cd ai-supply-chain-project
+
+Set Up the AI Model:
+
+Train your own YOLOv8 model (e.g., using Google Colab).
 
 Place the resulting best.pt file inside the backend/models/ directory.
 
-3. Set Up and Run the Backend
-The backend runs on Python and FastAPI.
+Install the dependencies:
 
-# Navigate to the backend directory
-cd backend
+Using npm (for the frontend):
 
-# Create a Python virtual environment
-python -m venv venv
+npm install --prefix frontend
 
-# Activate the virtual environment
-# On macOS/Linux:
-source venv/bin/activate
-# On Windows:
-# venv\Scripts\activate
+Using pip (for the backend):
 
-# Install the required Python packages
-pip install -r requirements.txt
+pip install -r backend/requirements.txt
 
-# Start the backend server
-uvicorn app.main:app --reload
+Usage
+Run the project with the following commands.
 
-The backend will now be running at http://localhost:8000. You should see a terminal message confirming that the YOLOv8 model was loaded successfully.
+1. Start the Backend Server:
 
-4. Set Up and Run the Frontend
-The frontend is a React application built with Vite.
+# From the project root directory
+uvicorn backend.app.main:app --reload
 
-# Open a new, separate terminal window
-# Navigate to the frontend directory
-cd frontend
+The backend will be running at http://localhost:8000.
 
-# Install the required npm packages
-npm install
+2. Start the Frontend Development Server:
 
-# Start the frontend development server
-npm run dev
+# From the project root directory, in a new terminal
+npm run dev --prefix frontend
 
-The frontend will now be running at http://localhost:5173 (or the next available port). Open this URL in your browser to use the application locally.
+The frontend will be running at http://localhost:5173.
+
+Live Demo
+You can view and interact with the deployed application here:
+
+https://ai-supply-chain.netlify.app/

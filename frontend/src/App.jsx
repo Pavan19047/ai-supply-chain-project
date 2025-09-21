@@ -1,69 +1,123 @@
 import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider, useAuth } from './context/AuthContext';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+// Import components
+import Login from './components/Login';
+import Register from './components/Register';
+import MainDashboard from './components/MainDashboard';
+import InventoryManagement from './components/InventoryManagement';
+import ForecastingDashboard from './components/ForecastingDashboard';
+import AnomalyDetection from './components/AnomalyDetection';
+import DataVisualization from './components/DataVisualization';
+import Sidebar from './components/Sidebar';
+import Header from './components/Header';
+
+// Styled components
 import styled from 'styled-components';
-import Dashboard from './components/Dashboard';
-import ChatInterface from './components/ChatInterface';
 
 const AppContainer = styled.div`
   display: flex;
-  flex-direction: column;
   height: 100vh;
   width: 100vw;
   overflow: hidden;
-  background-color: var(--color-bg);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 `;
 
-const Nav = styled.nav`
+const MainContent = styled.div`
+  flex: 1;
   display: flex;
-  justify-content: center;
-  padding: 1.5rem;
-  gap: 1.5rem;
-`;
-
-const NavButton = styled.button`
-  background: var(--color-bg);
-  border: none;
-  padding: 0.8rem 1.5rem;
-  border-radius: 20px;
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--color-text-secondary);
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  box-shadow: ${props => props.active ? 'var(--shadow-pressed)' : 'var(--shadow-raised)'};
-
-  &:hover {
-    color: var(--color-text-primary);
-  }
-
-  &:active {
-    box-shadow: var(--shadow-pressed);
-  }
+  flex-direction: column;
+  overflow: hidden;
 `;
 
 const ContentArea = styled.main`
-  flex-grow: 1;
+  flex: 1;
   overflow-y: auto;
-  padding: 0 2rem 2rem 2rem;
+  padding: 2rem;
+  background: #f8fafc;
+  margin: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 `;
 
-function App() {
-  const [activeView, setActiveView] = useState('dashboard');
+const AuthContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+`;
 
+// Protected Route Component
+const ProtectedRoute = ({ children }) => {
+  const { user, isLoading } = useAuth();
+  
+  if (isLoading) {
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <div>Loading...</div>
+      </div>
+    );
+  }
+  
+  return user ? children : <Navigate to="/login" />;
+};
+
+// Main App Layout
+const AppLayout = () => {
+  const [activeView, setActiveView] = useState('dashboard');
+  
   return (
     <AppContainer>
-      <Nav>
-        <NavButton active={activeView === 'dashboard'} onClick={() => setActiveView('dashboard')}>
-          📦 Inventory Vision
-        </NavButton>
-        <NavButton active={activeView === 'chat'} onClick={() => setActiveView('chat')}>
-          🤖 AI Chat Assistant
-        </NavButton>
-      </Nav>
-      <ContentArea>
-        {activeView === 'dashboard' && <Dashboard />}
-        {activeView === 'chat' && <ChatInterface />}
-      </ContentArea>
+      <Sidebar activeView={activeView} setActiveView={setActiveView} />
+      <MainContent>
+        <Header />
+        <ContentArea>
+          <Routes>
+            <Route path="/" element={<Navigate to="/dashboard" />} />
+            <Route path="/dashboard" element={<MainDashboard />} />
+            <Route path="/inventory" element={<InventoryManagement />} />
+            <Route path="/forecasting" element={<ForecastingDashboard />} />
+            <Route path="/anomalies" element={<AnomalyDetection />} />
+            <Route path="/analytics" element={<DataVisualization />} />
+          </Routes>
+        </ContentArea>
+      </MainContent>
     </AppContainer>
+  );
+};
+
+// Main App Component
+function App() {
+  return (
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/*" element={
+            <ProtectedRoute>
+              <AppLayout />
+            </ProtectedRoute>
+          } />
+        </Routes>
+        <ToastContainer 
+          position="top-right" 
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
+      </Router>
+    </AuthProvider>
   );
 }
 

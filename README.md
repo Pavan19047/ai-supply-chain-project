@@ -308,7 +308,46 @@ gcloud run deploy supply-chain-frontend \
   --region us-central1
 ```
 
-#### **Option 3: Digital Ocean/Linode**
+#### **Option 3: Firebase Deployment (Full-Stack)**
+```bash
+# 1. Install Firebase CLI
+npm install -g firebase-tools
+
+# 2. Login and initialize
+firebase login
+firebase init
+
+# 3. Configure project
+# Select: Firestore, Functions, Hosting, Storage
+# Use existing configuration files
+
+# 4. Deploy to Firebase
+firebase deploy
+
+# 5. Access your app
+# Frontend: https://your-project-id.web.app
+# API: https://your-project-id.web.app/api
+```
+
+**📚 Detailed Firebase Guide**: See [FIREBASE_DEPLOYMENT.md](FIREBASE_DEPLOYMENT.md)
+```bash
+# 1. Set up server
+sudo apt update && sudo apt install docker.io docker-compose nginx
+
+# 2. Clone and deploy
+git clone https://github.com/Pavan19047/ai-supply-chain-project.git
+cd ai-supply-chain-project
+
+# 3. Configure environment
+cp .env.example .env
+# Edit .env with production values
+
+# 4. Deploy with SSL
+docker-compose -f docker-compose.prod.yml up -d
+sudo certbot --nginx -d yourdomain.com
+```
+
+#### **Option 4: Digital Ocean/Linode**
 ```bash
 # 1. Set up server
 sudo apt update && sudo apt install docker.io docker-compose nginx

@@ -1,0 +1,41 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Users can read/write their own data
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Authenticated users can read/write inventory
+    match /inventory/{document} {
+      allow read, write: if request.auth != null;
+    }
+    
+    // Authenticated users can read/write sales
+    match /sales/{document} {
+      allow read, write: if request.auth != null;
+    }
+    
+    // Authenticated users can read/write suppliers
+    match /suppliers/{document} {
+      allow read, write: if request.auth != null;
+    }
+    
+    // Authenticated users can read reports
+    match /reports/{document} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && 
+        request.auth.token.role in ['admin', 'manager'];
+    }
+    
+    // Authenticated users can read/write forecasts
+    match /forecasts/{document} {
+      allow read, write: if request.auth != null;
+    }
+    
+    // Authenticated users can read/write anomalies
+    match /anomalies/{document} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}
